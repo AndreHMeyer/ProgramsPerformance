@@ -1,0 +1,15 @@
+C:\Users\AndréMeyer\OneDrive - SMART CONSULTING\Área de Trabalho\C#\TempoDeProcessamento\CalcConversion\CalcConversion\bin\Debug\net6.0\CalcConversion.exe
+C:\Users\AndréMeyer\OneDrive - SMART CONSULTING\Área de Trabalho\C#\TempoDeProcessamento\CalcConversion\CalcConversion\bin\Debug\net6.0\CalcConversion.deps.json
+C:\Users\AndréMeyer\OneDrive - SMART CONSULTING\Área de Trabalho\C#\TempoDeProcessamento\CalcConversion\CalcConversion\bin\Debug\net6.0\CalcConversion.runtimeconfig.json
+C:\Users\AndréMeyer\OneDrive - SMART CONSULTING\Área de Trabalho\C#\TempoDeProcessamento\CalcConversion\CalcConversion\bin\Debug\net6.0\CalcConversion.dll
+C:\Users\AndréMeyer\OneDrive - SMART CONSULTING\Área de Trabalho\C#\TempoDeProcessamento\CalcConversion\CalcConversion\bin\Debug\net6.0\CalcConversion.pdb
+C:\Users\AndréMeyer\OneDrive - SMART CONSULTING\Área de Trabalho\C#\TempoDeProcessamento\CalcConversion\CalcConversion\obj\Debug\net6.0\CalcConversion.csproj.AssemblyReference.cache
+C:\Users\AndréMeyer\OneDrive - SMART CONSULTING\Área de Trabalho\C#\TempoDeProcessamento\CalcConversion\CalcConversion\obj\Debug\net6.0\CalcConversion.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\AndréMeyer\OneDrive - SMART CONSULTING\Área de Trabalho\C#\TempoDeProcessamento\CalcConversion\CalcConversion\obj\Debug\net6.0\CalcConversion.AssemblyInfoInputs.cache
+C:\Users\AndréMeyer\OneDrive - SMART CONSULTING\Área de Trabalho\C#\TempoDeProcessamento\CalcConversion\CalcConversion\obj\Debug\net6.0\CalcConversion.AssemblyInfo.cs
+C:\Users\AndréMeyer\OneDrive - SMART CONSULTING\Área de Trabalho\C#\TempoDeProcessamento\CalcConversion\CalcConversion\obj\Debug\net6.0\CalcConversion.csproj.CoreCompileInputs.cache
+C:\Users\AndréMeyer\OneDrive - SMART CONSULTING\Área de Trabalho\C#\TempoDeProcessamento\CalcConversion\CalcConversion\obj\Debug\net6.0\CalcConversion.dll
+C:\Users\AndréMeyer\OneDrive - SMART CONSULTING\Área de Trabalho\C#\TempoDeProcessamento\CalcConversion\CalcConversion\obj\Debug\net6.0\refint\CalcConversion.dll
+C:\Users\AndréMeyer\OneDrive - SMART CONSULTING\Área de Trabalho\C#\TempoDeProcessamento\CalcConversion\CalcConversion\obj\Debug\net6.0\CalcConversion.pdb
+C:\Users\AndréMeyer\OneDrive - SMART CONSULTING\Área de Trabalho\C#\TempoDeProcessamento\CalcConversion\CalcConversion\obj\Debug\net6.0\CalcConversion.genruntimeconfig.cache
+C:\Users\AndréMeyer\OneDrive - SMART CONSULTING\Área de Trabalho\C#\TempoDeProcessamento\CalcConversion\CalcConversion\obj\Debug\net6.0\ref\CalcConversion.dll
