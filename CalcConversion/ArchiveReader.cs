@@ -13,7 +13,7 @@ namespace CalcConversion
             Paths = paths;
         }
 
-        public List<string> ReadTxtAndGetOpcodes()
+        public List<string> ReadTxt()
         {
             List<string> opcodeList = new List<string>();
 
@@ -53,5 +53,30 @@ namespace CalcConversion
 
             return opcodeList;
         }
+
+        public string GetArchiveName(string fileName)
+        {
+
+            foreach (string path in Paths)
+            {
+                if (!File.Exists(path))
+                {
+                    Console.WriteLine($"O arquivo {path} não existe.");
+                    continue;
+                }
+
+                try
+                {
+                    fileName = Path.GetFileName(path);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Ocorreu um erro ao obter o nome do arquivo {path}: {ex.Message}");
+                }
+            }
+
+            return fileName;
+        }
+
     }
 }

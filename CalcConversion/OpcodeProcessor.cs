@@ -9,7 +9,6 @@ namespace CalcConversion
 
         public OpcodeProcessor()
         {
-            // Inicializa os valores dos opcodes
             opcodeValues = new Dictionary<string, int>
             {
                 { "0110111", 2 },   // U
@@ -84,45 +83,20 @@ namespace CalcConversion
             int totalInstructions = opcodes.Count;
 
             double cpi = (double)totalCycles / totalInstructions;
+            cpi = Math.Round(cpi, 3);
+
             return cpi;
         }
 
-        /*public string CalculateProgramsPerformance(List<string> opcodesOrgA, List<string> opcodesOrgB, double clockOrgA, double clockOrgB)
+        public double CalculateProgramsPerformance(List<string> opcodes)
         {
-            OpcodeProcessor opcodeProcessor = new OpcodeProcessor();
+            int totalCycles = CalculateTotalCycles(opcodes);
+            double cyclesByInstruction = CalculateCyclesByInstructions(opcodes);
 
-            double ciclosTotaisOrgA = opcodeProcessor.CalculateTotalCycles(opcodesOrgA);
-            double ciclosTotaisOrgB = opcodeProcessor.CalculateTotalCycles(opcodesOrgB);
+            double performance = (double)totalCycles* cyclesByInstruction;
+            performance = Math.Round(performance, 3);
 
-            double tExecucaoCPUA = ciclosTotaisOrgA * clockOrgA;
-            double tExecucaoCPUB = ciclosTotaisOrgB * clockOrgB;
-
-            double desempenhoCPUA = tExecucaoCPUB / tExecucaoCPUA;
-            double desempenhoCPUB = tExecucaoCPUA / tExecucaoCPUB;
-
-            string resultado = $"Desempenho CPU A: {desempenhoCPUA:F2}\nDesempenho CPU B: {desempenhoCPUB:F2}";
-
-            return resultado;
-        }*/
-
-        public double CalculateProgramsPerformance(List<string> opcodes, List<string> filePaths, double clockOrgA, double clockOrgB)
-        {
-            int totalCyclesOrgA = CalculateTotalCycles(opcodes);
-            double execTimeOrgA = totalCyclesOrgA * clockOrgA;
-
-            List<string> opcodesOrgB = new List<string>();
-            foreach (string filePath in filePaths)
-            {
-                ArchiveReader archiveReader = new ArchiveReader(filePath);
-                List<string> opcodeList = archiveReader.ReadTxtAndGetOpcodes();
-                opcodesOrgB.AddRange(opcodeList);
-            }
-
-            int totalCyclesOrgB = CalculateTotalCycles(opcodesOrgB);
-            double execTimeOrgB = totalCyclesOrgB * clockOrgB;
-
-            double performanceComparation = execTimeOrgB / execTimeOrgA;
-            return performanceComparation;
+            return performance;
         }
 
     }

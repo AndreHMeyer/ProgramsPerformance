@@ -14,7 +14,7 @@ namespace CalcConversion
             };
 
             ArchiveReader archiveReader = new ArchiveReader(paths);
-            PerformanceGUID performanceGUID = new PerformanceGUID(paths); // Altere esta linha
+            PerformanceGUID performanceGUID = new PerformanceGUID(paths);
 
             performanceGUID.Menu();
         }
