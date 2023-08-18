@@ -9,8 +9,8 @@ namespace CalcConversion
         {
             List<string> paths = new List<string>
             {
-                @"C:\Users\AndréMeyer\Downloads\BinaryCode.txt",
-                @"C:\Users\AndréMeyer\Downloads\BinaryCode2.txt",
+                @"",
+                @"",
             };
 
             ArchiveReader archiveReader = new ArchiveReader(paths);
