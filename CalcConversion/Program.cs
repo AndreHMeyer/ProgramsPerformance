@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace CalcConversion
+namespace DataConflict
 {
     internal class Program
     {
@@ -9,8 +9,7 @@ namespace CalcConversion
         {
             List<string> paths = new List<string>
             {
-                @"",
-                @"",
+                @"C:\Users\AndréMeyer\OneDrive - SMART CONSULTING\Área de Trabalho\C#\ConflitoDeDadosPipeline\CalcConversion\BinaryFiles\BinaryCode.txt"
             };
 
             ArchiveReader archiveReader = new ArchiveReader(paths);

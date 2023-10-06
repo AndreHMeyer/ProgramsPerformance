@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace CalcConversion
+namespace DataConflict
 {
     public class PerformanceGUID
     {
@@ -16,39 +16,56 @@ namespace CalcConversion
         {
             int choice;
 
-            do
+            OpcodeProcessor opcodeProcessor = new OpcodeProcessor();
+
+            Console.WriteLine("--- CONFLITOS DE DADOS NO PIPELINE ---\n");
+            Console.WriteLine("Digite o tempo de clock do Pipeline");
+            int valueClockTime = int.Parse(Console.ReadLine());
+            opcodeProcessor.ClockTimePipeline = valueClockTime;
+
+            if (valueClockTime > 0)
             {
-                Console.WriteLine("--- COMPARATIVO DE DESEMPENHO ---\n");
-                Console.WriteLine("1 - Binário e Instruções");
-                Console.WriteLine("2 - Ciclos Totais");
-                Console.WriteLine("3 - Ciclos por Instrução");
-                Console.WriteLine("4 - Desempenho");
-                Console.WriteLine("5 - Sair");
-                Console.Write("\nEscolha uma opção: ");
-                choice = int.Parse(Console.ReadLine());
 
-                switch (choice)
+                Console.Clear();
+
+                do
                 {
-                    case 1:
-                        ShowLinesAndInstruction();
-                        break;
-                    case 2:
-                        TotalCycles();
-                        break;
-                    case 3:
-                        InstructionsCycles();
-                        break;
-                    case 4:
-                        Performance();
-                        break;
-                    case 5:
-                        Console.Clear();
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Saindo...");
-                        break;
-                }
+                    Console.WriteLine("--- CONFLITOS DE DADOS NO PIPELINE ---\n");
+                    Console.WriteLine("1 - Binário e Instruções");
+                    Console.WriteLine("2 - Inserção de NOPs");
+                    Console.WriteLine("3 - Forwarding - Inserção de NOPs");
+                    Console.WriteLine("4 - Reordenação de Instruções - Inserção de NOPs");
+                    Console.WriteLine("5 - Forwarding - Reordenação de Instruções - Inserção de NOPs");
+                    Console.WriteLine("6 - Sair");
+                    Console.Write("\nEscolha uma opção: ");
+                    choice = int.Parse(Console.ReadLine());
 
-            } while (choice != 5);
+                    switch (choice)
+                    {
+                        case 1:
+                            ShowLinesAndInstruction();
+                            break;
+                        case 2:
+                            IncludeNops(opcodeProcessor);
+                            break;
+                        case 3:
+                            ForwardingIncludeNops(opcodeProcessor);
+                            break;
+                        case 4:
+                            ReordenateInsertNops(opcodeProcessor);
+                            break;
+                        case 5:
+                            ForwardingReordenateInsertNops(opcodeProcessor);
+                            break;
+                        case 6:
+                            Console.Clear();
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("Saindo...");
+                            break;
+                    }
+
+                } while (choice != 6);
+            }
         }
 
         private void ShowLinesAndInstruction()
@@ -60,7 +77,7 @@ namespace CalcConversion
 
             foreach (string filePath in filePaths)
             {
-                List<string> singleFilePath = new List<string> { filePath }; 
+                List<string> singleFilePath = new List<string> { filePath };
                 ArchiveReader archiveReader = new ArchiveReader(singleFilePath);
                 List<string> opcodeList = archiveReader.ReadTxt();
 
@@ -80,14 +97,11 @@ namespace CalcConversion
 
             Console.Clear();
         }
-        
 
-        private void TotalCycles()
+        private void IncludeNops(OpcodeProcessor opcodeProcessor)
         {
             Console.Clear();
-            Console.WriteLine("--- CICLOS TOTAIS ---\n");
-
-            OpcodeProcessor opcodeProcessor = new OpcodeProcessor();
+            Console.WriteLine("--- INSERÇÃO DE NOPS ---\n");
 
             foreach (string filePath in filePaths)
             {
@@ -95,8 +109,25 @@ namespace CalcConversion
                 ArchiveReader archiveReader = new ArchiveReader(singleFilePath);
                 List<string> opcodeList = archiveReader.ReadTxt();
 
-                int totalCycles = opcodeProcessor.CalculateTotalCycles(opcodeList);
-                Console.WriteLine($"Total de ciclos no arquivo {archiveReader.GetArchiveName(filePath)}: {totalCycles}");
+                Console.WriteLine($"Arquivo: {archiveReader.GetArchiveName(filePath)}\n");
+
+                // Chame o método que faz a inserção de NOPs
+                opcodeProcessor.IncludeNops(opcodeList);
+
+                foreach (string opcode in opcodeList)
+                {
+                    string instruction = opcodeProcessor.GetOpcodeName(opcode);
+                    Console.WriteLine($"Binário: {opcode} - Instrução: {instruction}");
+                }
+
+                Console.WriteLine("\n--- RESULTADOS DO DESEMPENHO ---\n");
+                Console.WriteLine($"Tempo de Clock do Pipeline: {opcodeProcessor.ClockTimePipeline}");
+
+                // Calcule o desempenho com os novos opcodes após a inclusão de NOPs
+                double performance = opcodeProcessor.Performance(opcodeList);
+                Console.WriteLine($"Desempenho: {performance} ns");
+
+                Console.WriteLine("");
             }
 
             Console.WriteLine("\nPressione qualquer tecla para voltar ao menu.");
@@ -105,12 +136,10 @@ namespace CalcConversion
             Console.Clear();
         }
 
-        private void InstructionsCycles()
+        private void ForwardingIncludeNops(OpcodeProcessor opcodeProcessor)
         {
             Console.Clear();
-            Console.WriteLine("--- CICLOS POR INSTRUÇÃO ---\n");
-
-            OpcodeProcessor opcodeProcessor = new OpcodeProcessor();
+            Console.WriteLine("--- FORWARDING - INSERÇÃO DE NOPS ---\n");
 
             foreach (string filePath in filePaths)
             {
@@ -118,8 +147,25 @@ namespace CalcConversion
                 ArchiveReader archiveReader = new ArchiveReader(singleFilePath);
                 List<string> opcodeList = archiveReader.ReadTxt();
 
-                double totalInstructions = opcodeProcessor.CalculateCyclesByInstructions(opcodeList);
-                Console.WriteLine($"Total de instruções no arquivo {archiveReader.GetArchiveName(filePath)}: {totalInstructions}");
+                Console.WriteLine($"Arquivo: {archiveReader.GetArchiveName(filePath)}\n");
+
+                // Chame o método do OpcodeProcessor que realiza a inserção de NOPs com encaminhamento de dados
+                opcodeProcessor.ForwardingIncludeNops(opcodeList);
+
+                foreach (string opcode in opcodeList)
+                {
+                    string instruction = opcodeProcessor.GetOpcodeName(opcode);
+                    Console.WriteLine($"Binário: {opcode} - Instrução: {instruction}");
+                }
+
+                Console.WriteLine("\n--- RESULTADOS DO DESEMPENHO ---\n");
+                Console.WriteLine($"Tempo de Clock do Pipeline: {opcodeProcessor.ClockTimePipeline}");
+
+                // Calcule o desempenho com os novos opcodes após a inclusão de NOPs
+                double performance = opcodeProcessor.Performance(opcodeList);
+                Console.WriteLine($"Desempenho: {performance} ns");
+
+                Console.WriteLine("");
             }
 
             Console.WriteLine("\nPressione qualquer tecla para voltar ao menu.");
@@ -128,46 +174,36 @@ namespace CalcConversion
             Console.Clear();
         }
 
-        private void Performance()
+        private void ReordenateInsertNops(OpcodeProcessor opcodeProcessor)
         {
             Console.Clear();
-            Console.WriteLine("--- DESEMPENHO ---\n");
+            Console.WriteLine("--- REORDENAÇÃO DE INSTRUÇÕES - INSERÇÃO DE NOPs ---\n");
 
-            OpcodeProcessor opcodeProcessor = new OpcodeProcessor();
-
-            for (int i = 0; i < filePaths.Count - 1; i++)
+            foreach (string filePath in filePaths)
             {
-                string filePath1 = filePaths[i];
-                string filePath2 = filePaths[i + 1];
+                List<string> singleFilePath = new List<string> { filePath };
+                ArchiveReader archiveReader = new ArchiveReader(singleFilePath);
+                List<string> opcodeList = archiveReader.ReadTxt();
 
-                List<string> singleFilePath1 = new List<string> { filePath1 };
-                ArchiveReader archiveReader1 = new ArchiveReader(singleFilePath1);
-                List<string> opcodeList1 = archiveReader1.ReadTxt();
+                Console.WriteLine($"Arquivo: {archiveReader.GetArchiveName(filePath)}\n");
 
-                List<string> singleFilePath2 = new List<string> { filePath2 };
-                ArchiveReader archiveReader2 = new ArchiveReader(singleFilePath2);
-                List<string> opcodeList2 = archiveReader2.ReadTxt();
+                // Chame o método do OpcodeProcessor que realiza a reordenação e inserção de NOPs
+                opcodeProcessor.ReordenateInsertNops(opcodeList);
 
-                double performanceA = opcodeProcessor.CalculateProgramsPerformance(opcodeList1);
-                double performanceB = opcodeProcessor.CalculateProgramsPerformance(opcodeList2);
-
-                Console.WriteLine($"Tempo de execução do programa {archiveReader1.GetArchiveName(filePath1)}: {performanceA}");
-                Console.WriteLine($"Tempo de execução do programa {archiveReader2.GetArchiveName(filePath2)}: {performanceB}");
-
-                double bestPerformance = 0;
-
-                if(performanceA > performanceB)
+                foreach (string opcode in opcodeList)
                 {
-                    bestPerformance = performanceA / performanceB;
-
-                    Console.WriteLine($"O programa {archiveReader1.GetArchiveName(filePath1)} é {bestPerformance} mais rápido que o programa {archiveReader2.GetArchiveName(filePath2)}");
+                    string instruction = opcodeProcessor.GetOpcodeName(opcode);
+                    Console.WriteLine($"Binário: {opcode} - Instrução: {instruction}");
                 }
-                else
-                {
-                    bestPerformance = performanceB / performanceA;
 
-                    Console.WriteLine($"\nO programa {archiveReader1.GetArchiveName(filePath1)} é {bestPerformance.ToString("0.000")} mais rápido que o programa {archiveReader2.GetArchiveName(filePath2)}");
-                }
+                Console.WriteLine("\n--- RESULTADOS DO DESEMPENHO ---\n");
+                Console.WriteLine($"Tempo de Clock do Pipeline: {opcodeProcessor.ClockTimePipeline}");
+
+                // Calcule o desempenho com os novos opcodes após a inclusão de NOPs
+                double performance = opcodeProcessor.Performance(opcodeList);
+                Console.WriteLine($"Desempenho: {performance} ns");
+
+                Console.WriteLine("");
             }
 
             Console.WriteLine("\nPressione qualquer tecla para voltar ao menu.");
@@ -176,6 +212,42 @@ namespace CalcConversion
             Console.Clear();
         }
 
+        private void ForwardingReordenateInsertNops(OpcodeProcessor opcodeProcessor)
+        {
+            Console.Clear();
+            Console.WriteLine("--- FORWARDING - REORDENAÇÃO DE INSTRUÇÕES - INSERÇÃO DE NOPs ---\n");
 
+            foreach (string filePath in filePaths)
+            {
+                List<string> singleFilePath = new List<string> { filePath };
+                ArchiveReader archiveReader = new ArchiveReader(singleFilePath);
+                List<string> opcodeList = archiveReader.ReadTxt();
+
+                Console.WriteLine($"Arquivo: {archiveReader.GetArchiveName(filePath)}\n");
+
+                // Chame o método do OpcodeProcessor que realiza a reordenação, inserção de NOPs e encaminhamento de dados
+                opcodeProcessor.ForwardingReordenateInsertNops(opcodeList);
+
+                foreach (string opcode in opcodeList)
+                {
+                    string instruction = opcodeProcessor.GetOpcodeName(opcode);
+                    Console.WriteLine($"Binário: {opcode} - Instrução: {instruction}");
+                }
+
+                Console.WriteLine("\n--- RESULTADOS DO DESEMPENHO ---");
+                Console.WriteLine($"Tempo de Clock do Pipeline: {opcodeProcessor.ClockTimePipeline}");
+
+                // Calcule o desempenho com os novos opcodes após a inclusão de NOPs
+                double performance = opcodeProcessor.Performance(opcodeList);
+                Console.WriteLine($"Desempenho: {performance} ns");
+
+                Console.WriteLine("");
+            }
+
+            Console.WriteLine("\nPressione qualquer tecla para voltar ao menu.");
+            Console.ReadKey();
+
+            Console.Clear();
+        }
     }
 }

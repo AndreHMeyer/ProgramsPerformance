@@ -1,0 +1,15 @@
+C:\Users\AndréMeyer\OneDrive - SMART CONSULTING\Área de Trabalho\C#\ConflitoDeDadosPipeline\CalcConversion\CalcConversion\bin\Debug\net6.0\DataConflict.exe
+C:\Users\AndréMeyer\OneDrive - SMART CONSULTING\Área de Trabalho\C#\ConflitoDeDadosPipeline\CalcConversion\CalcConversion\bin\Debug\net6.0\DataConflict.deps.json
+C:\Users\AndréMeyer\OneDrive - SMART CONSULTING\Área de Trabalho\C#\ConflitoDeDadosPipeline\CalcConversion\CalcConversion\bin\Debug\net6.0\DataConflict.runtimeconfig.json
+C:\Users\AndréMeyer\OneDrive - SMART CONSULTING\Área de Trabalho\C#\ConflitoDeDadosPipeline\CalcConversion\CalcConversion\bin\Debug\net6.0\DataConflict.dll
+C:\Users\AndréMeyer\OneDrive - SMART CONSULTING\Área de Trabalho\C#\ConflitoDeDadosPipeline\CalcConversion\CalcConversion\bin\Debug\net6.0\DataConflict.pdb
+C:\Users\AndréMeyer\OneDrive - SMART CONSULTING\Área de Trabalho\C#\ConflitoDeDadosPipeline\CalcConversion\CalcConversion\obj\Debug\net6.0\DataConflict.csproj.AssemblyReference.cache
+C:\Users\AndréMeyer\OneDrive - SMART CONSULTING\Área de Trabalho\C#\ConflitoDeDadosPipeline\CalcConversion\CalcConversion\obj\Debug\net6.0\DataConflict.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\AndréMeyer\OneDrive - SMART CONSULTING\Área de Trabalho\C#\ConflitoDeDadosPipeline\CalcConversion\CalcConversion\obj\Debug\net6.0\DataConflict.AssemblyInfoInputs.cache
+C:\Users\AndréMeyer\OneDrive - SMART CONSULTING\Área de Trabalho\C#\ConflitoDeDadosPipeline\CalcConversion\CalcConversion\obj\Debug\net6.0\DataConflict.AssemblyInfo.cs
+C:\Users\AndréMeyer\OneDrive - SMART CONSULTING\Área de Trabalho\C#\ConflitoDeDadosPipeline\CalcConversion\CalcConversion\obj\Debug\net6.0\DataConflict.csproj.CoreCompileInputs.cache
+C:\Users\AndréMeyer\OneDrive - SMART CONSULTING\Área de Trabalho\C#\ConflitoDeDadosPipeline\CalcConversion\CalcConversion\obj\Debug\net6.0\DataConflict.dll
+C:\Users\AndréMeyer\OneDrive - SMART CONSULTING\Área de Trabalho\C#\ConflitoDeDadosPipeline\CalcConversion\CalcConversion\obj\Debug\net6.0\refint\DataConflict.dll
+C:\Users\AndréMeyer\OneDrive - SMART CONSULTING\Área de Trabalho\C#\ConflitoDeDadosPipeline\CalcConversion\CalcConversion\obj\Debug\net6.0\DataConflict.pdb
+C:\Users\AndréMeyer\OneDrive - SMART CONSULTING\Área de Trabalho\C#\ConflitoDeDadosPipeline\CalcConversion\CalcConversion\obj\Debug\net6.0\DataConflict.genruntimeconfig.cache
+C:\Users\AndréMeyer\OneDrive - SMART CONSULTING\Área de Trabalho\C#\ConflitoDeDadosPipeline\CalcConversion\CalcConversion\obj\Debug\net6.0\ref\DataConflict.dll
