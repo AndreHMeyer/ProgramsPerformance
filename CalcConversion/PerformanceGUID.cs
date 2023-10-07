@@ -6,6 +6,7 @@ namespace DataConflict
     public class PerformanceGUID
     {
         private List<string> filePaths;
+        OpcodeProcessor opcodeProcessor = new OpcodeProcessor();
 
         public PerformanceGUID(List<string> filePaths)
         {
@@ -15,8 +16,6 @@ namespace DataConflict
         public void Menu()
         {
             int choice;
-
-            OpcodeProcessor opcodeProcessor = new OpcodeProcessor();
 
             Console.WriteLine("--- CONFLITOS DE DADOS NO PIPELINE ---\n");
             Console.WriteLine("Digite o tempo de clock do Pipeline");
@@ -40,22 +39,23 @@ namespace DataConflict
                     Console.Write("\nEscolha uma opção: ");
                     choice = int.Parse(Console.ReadLine());
 
+                    
                     switch (choice)
                     {
                         case 1:
                             ShowLinesAndInstruction();
                             break;
                         case 2:
-                            IncludeNops(opcodeProcessor);
+                            IncludeNops();
                             break;
                         case 3:
-                            ForwardingIncludeNops(opcodeProcessor);
+                            ForwardingIncludeNops();
                             break;
                         case 4:
-                            ReordenateInsertNops(opcodeProcessor);
+                            ReordenateInsertNops();
                             break;
                         case 5:
-                            ForwardingReordenateInsertNops(opcodeProcessor);
+                            ForwardingReordenateInsertNops();
                             break;
                         case 6:
                             Console.Clear();
@@ -73,8 +73,6 @@ namespace DataConflict
             Console.Clear();
             Console.WriteLine("--- BINÁRIO E INSTRUÇÕES ---\n");
 
-            OpcodeProcessor opcodeProcessor = new OpcodeProcessor();
-
             foreach (string filePath in filePaths)
             {
                 List<string> singleFilePath = new List<string> { filePath };
@@ -89,6 +87,13 @@ namespace DataConflict
                     Console.WriteLine($"Binário: {opcode} - Instrução: {instruction}");
                 }
 
+                Console.WriteLine("\n--- RESULTADOS DO DESEMPENHO ---\n");
+                Console.WriteLine($"Tempo de Clock do Pipeline: {opcodeProcessor.ClockTimePipeline}");
+                Console.WriteLine($"Número de Instruções: {opcodeProcessor.NumInstructions}");
+
+                double performance = opcodeProcessor.Performance(opcodeList);
+                Console.WriteLine($"Desempenho: {performance} ns");
+
                 Console.WriteLine("");
             }
 
@@ -98,7 +103,7 @@ namespace DataConflict
             Console.Clear();
         }
 
-        private void IncludeNops(OpcodeProcessor opcodeProcessor)
+        private void IncludeNops()
         {
             Console.Clear();
             Console.WriteLine("--- INSERÇÃO DE NOPS ---\n");
@@ -111,7 +116,6 @@ namespace DataConflict
 
                 Console.WriteLine($"Arquivo: {archiveReader.GetArchiveName(filePath)}\n");
 
-                // Chame o método que faz a inserção de NOPs
                 opcodeProcessor.IncludeNops(opcodeList);
 
                 foreach (string opcode in opcodeList)
@@ -122,8 +126,8 @@ namespace DataConflict
 
                 Console.WriteLine("\n--- RESULTADOS DO DESEMPENHO ---\n");
                 Console.WriteLine($"Tempo de Clock do Pipeline: {opcodeProcessor.ClockTimePipeline}");
+                Console.WriteLine($"Número de Instruções: {opcodeProcessor.NumInstructions}");
 
-                // Calcule o desempenho com os novos opcodes após a inclusão de NOPs
                 double performance = opcodeProcessor.Performance(opcodeList);
                 Console.WriteLine($"Desempenho: {performance} ns");
 
@@ -136,7 +140,7 @@ namespace DataConflict
             Console.Clear();
         }
 
-        private void ForwardingIncludeNops(OpcodeProcessor opcodeProcessor)
+        private void ForwardingIncludeNops()
         {
             Console.Clear();
             Console.WriteLine("--- FORWARDING - INSERÇÃO DE NOPS ---\n");
@@ -149,7 +153,6 @@ namespace DataConflict
 
                 Console.WriteLine($"Arquivo: {archiveReader.GetArchiveName(filePath)}\n");
 
-                // Chame o método do OpcodeProcessor que realiza a inserção de NOPs com encaminhamento de dados
                 opcodeProcessor.ForwardingIncludeNops(opcodeList);
 
                 foreach (string opcode in opcodeList)
@@ -160,8 +163,8 @@ namespace DataConflict
 
                 Console.WriteLine("\n--- RESULTADOS DO DESEMPENHO ---\n");
                 Console.WriteLine($"Tempo de Clock do Pipeline: {opcodeProcessor.ClockTimePipeline}");
+                Console.WriteLine($"Número de Instruções: {opcodeProcessor.NumInstructions}");
 
-                // Calcule o desempenho com os novos opcodes após a inclusão de NOPs
                 double performance = opcodeProcessor.Performance(opcodeList);
                 Console.WriteLine($"Desempenho: {performance} ns");
 
@@ -174,7 +177,7 @@ namespace DataConflict
             Console.Clear();
         }
 
-        private void ReordenateInsertNops(OpcodeProcessor opcodeProcessor)
+        private void ReordenateInsertNops()
         {
             Console.Clear();
             Console.WriteLine("--- REORDENAÇÃO DE INSTRUÇÕES - INSERÇÃO DE NOPs ---\n");
@@ -187,7 +190,6 @@ namespace DataConflict
 
                 Console.WriteLine($"Arquivo: {archiveReader.GetArchiveName(filePath)}\n");
 
-                // Chame o método do OpcodeProcessor que realiza a reordenação e inserção de NOPs
                 opcodeProcessor.ReordenateInsertNops(opcodeList);
 
                 foreach (string opcode in opcodeList)
@@ -198,8 +200,8 @@ namespace DataConflict
 
                 Console.WriteLine("\n--- RESULTADOS DO DESEMPENHO ---\n");
                 Console.WriteLine($"Tempo de Clock do Pipeline: {opcodeProcessor.ClockTimePipeline}");
+                Console.WriteLine($"Número de Instruções: {opcodeProcessor.NumInstructions}");
 
-                // Calcule o desempenho com os novos opcodes após a inclusão de NOPs
                 double performance = opcodeProcessor.Performance(opcodeList);
                 Console.WriteLine($"Desempenho: {performance} ns");
 
@@ -212,7 +214,7 @@ namespace DataConflict
             Console.Clear();
         }
 
-        private void ForwardingReordenateInsertNops(OpcodeProcessor opcodeProcessor)
+        private void ForwardingReordenateInsertNops()
         {
             Console.Clear();
             Console.WriteLine("--- FORWARDING - REORDENAÇÃO DE INSTRUÇÕES - INSERÇÃO DE NOPs ---\n");
@@ -225,7 +227,6 @@ namespace DataConflict
 
                 Console.WriteLine($"Arquivo: {archiveReader.GetArchiveName(filePath)}\n");
 
-                // Chame o método do OpcodeProcessor que realiza a reordenação, inserção de NOPs e encaminhamento de dados
                 opcodeProcessor.ForwardingReordenateInsertNops(opcodeList);
 
                 foreach (string opcode in opcodeList)
@@ -236,8 +237,8 @@ namespace DataConflict
 
                 Console.WriteLine("\n--- RESULTADOS DO DESEMPENHO ---");
                 Console.WriteLine($"Tempo de Clock do Pipeline: {opcodeProcessor.ClockTimePipeline}");
+                Console.WriteLine($"Número de Instruções: {opcodeProcessor.NumInstructions}");
 
-                // Calcule o desempenho com os novos opcodes após a inclusão de NOPs
                 double performance = opcodeProcessor.Performance(opcodeList);
                 Console.WriteLine($"Desempenho: {performance} ns");
 
