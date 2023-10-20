@@ -221,10 +221,11 @@ namespace DataConflict
 
         private string GetNOPInstruction()
         {
-            return "0010011";
+            return "0010011-";
         }
 
         public void ForwardingIncludeNops(List<string> opcodes)
+        
         {
             /* Considerar que foi implementada a técnica de forwarding e inserir NOPs, quando 
             necessário, para evitar conflito de dados.*/
