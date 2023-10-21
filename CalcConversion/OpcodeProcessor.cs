@@ -124,41 +124,14 @@ namespace DataConflict
         public int ClockTimePipeline { get; set; }
         public int NumInstructions { get; private set; }
 
-
-        public int CalculateTotalCycles(List<string> opcodes)
-        {
-            int totalCycles = 0;
-
-            foreach (string opcode in opcodes)
-            {
-                totalCycles += GetOpcodeValues(opcode);
-            }
-
-            return totalCycles;
-        }
-
         public double CalculateCyclesByInstructions(List<string> opcodes)
         {
-            int totalCycles = CalculateTotalCycles(opcodes);
             int totalInstructions = opcodes.Count;
 
-            double cpi = (double)totalCycles / totalInstructions;
+            double cpi = (5 + (totalInstructions - 1) * ClockTimePipeline);
             cpi = Math.Round(cpi, 3);
 
             return cpi;
-        }
-
-        public double Performance(List<string> opcodes)
-        {
-            int totalInstructions = opcodes.Count;
-            NumInstructions = totalInstructions;
-            double cpi = CalculateCyclesByInstructions(opcodes);
-            int clock = ClockTimePipeline;
-
-            double performance = totalInstructions * cpi * clock;
-
-            return performance;
-
         }
 
         public void IncludeNops(List<string> opcodes)
@@ -225,7 +198,6 @@ namespace DataConflict
         }
 
         public void ForwardingIncludeNops(List<string> opcodes)
-        
         {
             /* Considerar que foi implementada a técnica de forwarding e inserir NOPs, quando 
             necessário, para evitar conflito de dados.*/
@@ -248,14 +220,18 @@ namespace DataConflict
                 }
                 else
                 {
-                    // Verifica se há encaminhamento de dados disponível
-                    bool canForward = CanForwardData(opcodes, i, registerStatus);
-
-                    // Insere NOP ou encaminhamento de dados, conforme necessário
-                    if (!canForward)
+                    // Verifica se a instrução atual é igual a "L"
+                    if (opcodes[i] == "0000011")
                     {
-                        // Adiciona uma instrução NOP à lista de instruções modificadas
-                        modifiedOpcodes.Add(GetNOPInstruction());
+                        // Verifica se há encaminhamento de dados disponível
+                        bool canForward = CanForwardData(opcodes, i, registerStatus);
+
+                        // Insere NOP ou encaminhamento de dados, conforme necessário
+                        if (!canForward)
+                        {
+                            // Adiciona uma instrução NOP à lista de instruções modificadas
+                            modifiedOpcodes.Add(GetNOPInstruction());
+                        }
                     }
 
                     // Adiciona a instrução original à lista de instruções modificadas
@@ -447,9 +423,6 @@ namespace DataConflict
 
         public void ForwardingReordenateInsertNops(List<string> opcodes)
         {
-            /*Considerar que foi implementada a técnica de forwarding e quando possível 
-            reordenar as instruções e quando não for possível inserir NOPs, para evitar conflito de dados.*/
-
             // Armazena as instruções modificadas
             List<string> modifiedOpcodes = new List<string>();
 
@@ -466,24 +439,33 @@ namespace DataConflict
                 }
                 else
                 {
-                    // Verifica se há encaminhamento de dados disponível
-                    bool canForward = CanForwardData(opcodes, i, registerStatus);
-
-                    // Verifica se é possível reordenar instruções
-                    bool canReorder = CanReorderInstructions(opcodes, i, registerStatus);
-
-                    // Insere NOP ou reordena as instruções, conforme necessário
-                    if (!canForward && !canReorder)
+                    // Verifica se a instrução atual é "L"
+                    if (opcodes[i] == "0000011")
                     {
-                        modifiedOpcodes.Add(GetNOPInstruction());
+                        // Verifica se há encaminhamento de dados disponível apenas para "L"
+                        bool canForward = CanForwardData(opcodes, i, registerStatus);
+
+                        // Verifica se é possível reordenar instruções
+                        bool canReorder = CanReorderInstructions(opcodes, i, registerStatus);
+
+                        // Insere NOP ou reordena as instruções, conforme necessário
+                        if (!canForward && !canReorder)
+                        {
+                            modifiedOpcodes.Add(GetNOPInstruction());
+                        }
+                        else
+                        {
+                            // Reordena as instruções se possível
+                            if (canReorder)
+                            {
+                                ReorderInstructions(opcodes, i, modifiedOpcodes);
+                            }
+                            modifiedOpcodes.Add(opcodes[i]);
+                        }
                     }
                     else
                     {
-                        // Reordena as instruções se possível
-                        if (canReorder)
-                        {
-                            ReorderInstructions(opcodes, i, modifiedOpcodes);
-                        }
+                        // Se a instrução não for "L", simplesmente a adiciona à lista de instruções modificadas
                         modifiedOpcodes.Add(opcodes[i]);
                     }
 

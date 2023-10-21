@@ -18,7 +18,7 @@ namespace DataConflict
             int choice;
 
             Console.WriteLine("--- CONFLITOS DE DADOS NO PIPELINE ---\n");
-            Console.WriteLine("Digite o tempo de clock do Pipeline");
+            Console.Write("Digite o tempo de clock do Pipeline: ");
             int valueClockTime = int.Parse(Console.ReadLine());
             opcodeProcessor.ClockTimePipeline = valueClockTime;
 
@@ -89,10 +89,9 @@ namespace DataConflict
 
                 Console.WriteLine("\n--- RESULTADOS DO DESEMPENHO ---\n");
                 Console.WriteLine($"Tempo de Clock do Pipeline: {opcodeProcessor.ClockTimePipeline}");
-                Console.WriteLine($"Número de Instruções: {opcodeProcessor.NumInstructions}");
+                Console.WriteLine($"Total de Instruções: {opcodeList.Count}");
+                Console.WriteLine($"Ciclos por Instrução: {opcodeProcessor.CalculateCyclesByInstructions(opcodeList)}");
 
-                double performance = opcodeProcessor.Performance(opcodeList);
-                Console.WriteLine($"Desempenho: {performance} ns");
 
                 Console.WriteLine("");
             }
@@ -126,10 +125,8 @@ namespace DataConflict
 
                 Console.WriteLine("\n--- RESULTADOS DO DESEMPENHO ---\n");
                 Console.WriteLine($"Tempo de Clock do Pipeline: {opcodeProcessor.ClockTimePipeline}");
-                Console.WriteLine($"Número de Instruções: {opcodeProcessor.NumInstructions}");
-
-                double performance = opcodeProcessor.Performance(opcodeList);
-                Console.WriteLine($"Desempenho: {performance} ns");
+                Console.WriteLine($"Total de Instruções: {opcodeList.Count}");
+                Console.WriteLine($"Ciclos por Instrução: {opcodeProcessor.CalculateCyclesByInstructions(opcodeList)}");
 
                 Console.WriteLine("");
             }
@@ -163,10 +160,8 @@ namespace DataConflict
 
                 Console.WriteLine("\n--- RESULTADOS DO DESEMPENHO ---\n");
                 Console.WriteLine($"Tempo de Clock do Pipeline: {opcodeProcessor.ClockTimePipeline}");
-                Console.WriteLine($"Número de Instruções: {opcodeProcessor.NumInstructions}");
-
-                double performance = opcodeProcessor.Performance(opcodeList);
-                Console.WriteLine($"Desempenho: {performance} ns");
+                Console.WriteLine($"Total de Instruções: {opcodeList.Count}");
+                Console.WriteLine($"Ciclos por Instrução: {opcodeProcessor.CalculateCyclesByInstructions(opcodeList)}");
 
                 Console.WriteLine("");
             }
@@ -200,10 +195,8 @@ namespace DataConflict
 
                 Console.WriteLine("\n--- RESULTADOS DO DESEMPENHO ---\n");
                 Console.WriteLine($"Tempo de Clock do Pipeline: {opcodeProcessor.ClockTimePipeline}");
-                Console.WriteLine($"Número de Instruções: {opcodeProcessor.NumInstructions}");
-
-                double performance = opcodeProcessor.Performance(opcodeList);
-                Console.WriteLine($"Desempenho: {performance} ns");
+                Console.WriteLine($"Total de Instruções: {opcodeList.Count}");
+                Console.WriteLine($"Ciclos por Instrução: {opcodeProcessor.CalculateCyclesByInstructions(opcodeList)}");
 
                 Console.WriteLine("");
             }
@@ -235,12 +228,10 @@ namespace DataConflict
                     Console.WriteLine($"Binário: {opcode} - Instrução: {instruction}");
                 }
 
-                Console.WriteLine("\n--- RESULTADOS DO DESEMPENHO ---");
+                Console.WriteLine("\n--- RESULTADOS DO DESEMPENHO ---\n");
                 Console.WriteLine($"Tempo de Clock do Pipeline: {opcodeProcessor.ClockTimePipeline}");
-                Console.WriteLine($"Número de Instruções: {opcodeProcessor.NumInstructions}");
-
-                double performance = opcodeProcessor.Performance(opcodeList);
-                Console.WriteLine($"Desempenho: {performance} ns");
+                Console.WriteLine($"Total de Instruções: {opcodeList.Count}");
+                Console.WriteLine($"Ciclos por Instrução: {opcodeProcessor.CalculateCyclesByInstructions(opcodeList)}");
 
                 Console.WriteLine("");
             }
